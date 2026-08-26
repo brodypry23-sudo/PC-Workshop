@@ -1,9 +1,13 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up | My Website</title>
+    <title>Sign Up | PC-Workshop</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -41,6 +45,15 @@
                         <button type="submit" class="btn btn-primary">Sign In</button>
 
                     </form>
+
+                    <?php if (isset($_SESSION['userId'])): ?>
+
+                        <div class="mt-3">
+                            <a href="./lib/logout.lib.php">Log out</a>
+                        </div>
+
+                    <?php endif; ?>
+
                 </div>
             </div>
         </div>
