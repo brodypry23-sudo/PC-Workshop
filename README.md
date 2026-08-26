@@ -8,6 +8,8 @@ XAMPP with Apache and MySQL/MariaDB
 PHP installed through XAMPP
 MySQL database configured for the website
 Website files placed in the XAMPP htdocs folder
-Internet connection for any external resources such as Bootstrap or fonts
-<img width="1561" height="832" alt="Screenshot 2026-08-12 120038" src="https://github.com/user-attachments/assets/b69930eb-473e-4d29-b738-3d5ce393fc0c" />
-<img width="1586" height="829" alt="Screenshot 2026-08-12 130950" src="https://github.com/user-attachments/assets/46352553-391e-4479-a3c1-16ff595e2f69" />
+Internet connection for any external resources such as Bootstrap or fonts.
+
+<img width="1610" height="878" alt="Screenshot 2026-08-26 231027" src="https://github.com/user-attachments/assets/81256b4e-72f6-49c3-b489-b68915f7677d" />
+<img width="1606" height="872" alt="Screenshot 2026-08-26 231034" src="https://github.com/user-attachments/assets/97ce3b32-c49c-4bf4-b821-fc484321ad00" />
+
