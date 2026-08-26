@@ -1,16 +1,13 @@
 <?php
 
-$host = "localhost";
-$userName = "root";
-$password = "";
-$databaseName = "projectdatabase";
+$dbHost = "localhost";
+$dbUser = "root";
+$dbPass = "";
+$dbName = "projectdatabase";
 
-// Create a new connection to the MySQL database
-$conn = new mysqli($host, $userName, $password, $databaseName);
+$conn = new mysqli($dbHost, $dbUser, $dbPass, $dbName);
 
-// Check if the connection was successful
 if ($conn->connect_error) {
     die("<div><h4>Connection failed</h4></div>");
 }
-
 ?>

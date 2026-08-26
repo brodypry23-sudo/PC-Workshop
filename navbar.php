@@ -2,7 +2,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark website-navbar sticky-top">
             <div class="container">
 
-                <a class="navbar-brand" href="index.php">My Website</a>
+                <a class="navbar-brand" href="index.php">PC-Workshop</a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
                         data-bs-target="#navContent" aria-controls="navContent" 
