@@ -9,51 +9,31 @@
 </head>
 <body>
 
-    <!--<header and navigation>-->
-    <span id="navbar-placeholder"></span>
-    <script>
-        fetch('navbar.php')    
-        .then(response => response.text())    
-        .then(html => { document.getElementById('navbar-placeholder').innerHTML = html; });
-    </script>
-    <!--<end header and navigation>-->
-
-    <h1>Our Posts</h1>
-    <p>This is the posts page.</p>
+    <?php include './navbar.php'; ?>
 
     <?php
-    //creates a counter variable to keep track of the number of posts displayed
-    $array = 0;
 
-    //creat some arrays to hold data that will be replaced with data from the database
-    $users = array('daniel', 'john', 'jane', 'mary', 'peter','hi');
-    $titles = array('coffee', 'tea', 'milk', 'juice', 'water','hi');
-    $discriptions = array('description1', 'description2', 'description3', 'description4', 'description5','hi');
+    require "./lib/posts.lib.php";
 
-    //loop through the arrays and display the data in a card format
-    for ($i = 0; $i < count($users); $i++) {
-        echo '<div class="card" style="width: 18rem;">';
-        echo '<div class="card-body">';
-        echo '<h5 class="card-title">' . $titles[$i] . '</h5>';
-        echo '<h6 class="card-subtitle mb-2 text-muted">By ' . $users[$i] . '</h6>';
-        echo '<p class="card-text">' . $discriptions[$i] . '</p>';
-        echo '</div>';
-        echo '</div>';
+    echo "<h3>This is a list of reviews</h3>";
 
-        //increment the counter variable
-        $array++;
+    for ($index = 0; $index < count($posts); $index++) {
+        echo "<div class='card mb-4'>";
+            echo "<img src='" . $posts[$index]['imageurl'] . "' class='card-img-top' alt='" . $posts[$index]['title'] . "'>";
+            echo "<div class='card-body'>";
+                echo "<h4 class='card-title'>" . $posts[$index]['title'] . "</h4>";
+                echo "<p class='card-text'>" . $posts[$index]['bodytext'] . "</p>";
+                echo "<p><strong>Price Bracket:</strong> " . $posts[$index]['pricebracket'] . "</p>";
+                echo "<p class='text-muted'>Posted by user #" . $posts[$index]['userId'] . " (Post ID: " . $posts[$index]['postId'] . ")</p>";
+
+                if (!empty($posts[$index]['partlists'])) {
+                    echo "<a href='" . $posts[$index]['partlists'] . "' target='_blank' class='btn btn-primary'>View on PCPartPicker</a>";
+                }
+            echo "</div>";
+        echo "</div>";
     }
+
     ?>
-
-
-
-
-
-
-
-
-
-
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> 
