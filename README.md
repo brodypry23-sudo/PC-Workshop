@@ -10,5 +10,6 @@ MySQL database configured for the website
 Website files placed in the XAMPP htdocs folder
 Internet connection for any external resources such as Bootstrap or fonts.
 
-<img width="1550" height="819" alt="Screenshot 2026-08-26 231620" src="https://github.com/user-attachments/assets/bd1659a0-9755-45c8-8d35-91bfd59cc54a" />
-<img width="1548" height="811" alt="Screenshot 2026-08-26 231613" src="https://github.com/user-attachments/assets/92413e5e-04d8-4e12-a975-9bf71e10d31f" />
+<img width="1248" height="701" alt="Screenshot 2026-09-02 225224" src="https://github.com/user-attachments/assets/03125f6d-c977-4edb-821f-7611585f8ea8" />
+<img width="1250" height="701" alt="Screenshot 2026-09-02 225230" src="https://github.com/user-attachments/assets/56c849d7-81f4-474b-9d82-a869f352c966" />
+
