@@ -18,7 +18,7 @@
                         <li class="nav-item"><a class="nav-link" href="createPost.php">Create Post</a></li>
                         <li class="nav-item"><a class="nav-link" href="editPost.php">Edit Post</a></li>
                         <li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
-                        <li class="nav-item"><a class="nav-link" href="signup.php">Sign Up</a></li>
+                        <li class="nav-item"><a class="nav-link" href="signup.php">Signup</a></li>
                     </ul>
                 </div>
                 

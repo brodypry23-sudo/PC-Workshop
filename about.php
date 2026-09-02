@@ -9,14 +9,7 @@
 </head>
 <body> 
 
-    <!--<header and navigation>-->
-    <span id="navbar-placeholder"></span>
-    <script>
-        fetch('navbar.php')    
-        .then(response => response.text())    
-        .then(html => { document.getElementById('navbar-placeholder').innerHTML = html; });
-    </script>
-    <!--<end header and navigation>-->
+    <?php include './navbar.php'; ?>
         
     <h1>About Us</h1>
     <p>Welcome to our about page! We are dedicated to providing you with the best content.</p>
