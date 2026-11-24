@@ -2,7 +2,8 @@
 session_start();
 
 // Connect to the database
-require "./lib/connect.lib.php";
+require __DIR__ . "/connect.lib.php";
+require_once __DIR__ . "/images.lib.php";
 
 // Create my SQL statement
 $sql = "SELECT * FROM builds";
@@ -29,6 +30,8 @@ $posts = [];
 
 // Fill that array with the posts from the database
 while ($row = $resultSet->fetch_assoc()) {
+    // Each post also gets its images (one small query per post is fine at this size)
+    $row['images'] = loadImages($conn, (int)$row['postId']);
     $posts[] = $row;
 }
 

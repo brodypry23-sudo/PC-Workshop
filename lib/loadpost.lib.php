@@ -8,13 +8,15 @@ if (!isset($_SESSION['userId'])) {
     header("location: ./posts.php");
     exit();
 }
-if (empty($_POST['postId'])) {
+
+// The postId comes from the Edit button (POST) or from a redirect after adding/deleting an image (GET)
+$postId = (int)($_POST['postId'] ?? $_GET['postId'] ?? 0);
+
+if ($postId <= 0) {
     header("location: ./posts.php");
     exit();
 }
 
-// Get the postId that was in the hidden field.
-$postId = $_POST['postId'];
 $userId = $_SESSION['userId'];
 
 // Init, Prepare, Bind, Execute

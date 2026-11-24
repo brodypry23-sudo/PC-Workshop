@@ -13,33 +13,59 @@ if (empty($_POST['postId'])) {
     exit();
 }
 
-// Get the postId that was in the hidden field.
-$postId = $_POST['postId'];
-$userId = $_SESSION['userId'];
+require __DIR__ . "/connect.lib.php";
+require_once __DIR__ . "/images.lib.php";
 
-// Init, Prepare, Bind, Execute
-require "./connect.lib.php";
+// Make database errors throw exceptions so the transaction can be rolled back
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
-if (!isset($Conn) && isset($conn)) {
-    $Conn = $conn;
-}
+$postId = (int)$_POST['postId'];
+$userId = (int)$_SESSION['userId'];
 
-if (!isset($Conn)) {
-    header("Location: ../posts.php");
+// 1. BR-6: the post must belong to the logged in user
+$ownerId = getPostOwner($conn, $postId);
+
+if ($ownerId === null) {
+    header("location: ../posts.php");
     exit();
 }
 
-$sql = "DELETE FROM builds WHERE postId = ? AND userId = ?";
-$statement = $Conn->stmt_init();
-if (!$statement->prepare($sql)) {
-    header("Location: ../posts.php"); //Redirect
-    exit();
-}
-$statement->bind_param("ii", $postId, $userId);
-if (!$statement->execute()) {
-    header("Location: ../posts.php");
+if ($ownerId !== $userId) {
+    error_log("deletepost: user " . $userId . " tried to delete post " . $postId . " owned by " . $ownerId);
+    flash('error', "You can only change your own posts.");
+    header("location: ../posts.php");
     exit();
 }
 
+// 2. Remember the image file names for after the database delete
+$images = loadImages($conn, $postId);
+
+// 3. Delete the image rows and the post in ONE transaction
+try {
+    $conn->begin_transaction();
+
+    $delImages = $conn->prepare("DELETE FROM images WHERE postId = ?");
+    $delImages->bind_param("i", $postId);
+    $delImages->execute();
+
+    $delPost = $conn->prepare("DELETE FROM builds WHERE postId = ? AND userId = ?");
+    $delPost->bind_param("ii", $postId, $userId);
+    $delPost->execute();
+
+    $conn->commit();
+} catch (Throwable $e) {
+    $conn->rollback();
+    error_log("deletepost: transaction rolled back for postId " . $postId . ": " . $e->getMessage());
+    flash('error', "The post could not be deleted. Please try again.");
+    header("location: ../posts.php");
+    exit();
+}
+
+// 4. Only after the commit: remove the files from disk (problems are only logged)
+foreach ($images as $image) {
+    deleteImageFile($userId, $image['tmpFileName']);
+}
+
+flash('success', "Post and its images deleted.");
 header("location: ../posts.php");
 exit();

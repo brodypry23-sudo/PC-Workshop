@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require "./connect.lib.php";
+require __DIR__ . "/connect.lib.php";
 
 // If the user is not logged in, go back to posts.php
 if (!isset($_SESSION['userId'])) {
@@ -14,16 +14,15 @@ if (empty($_POST['postId'])) {
     exit();
 }
 
-// Get the details from the form
+// Get the details from the form (images are handled by addimages / deleteimage)
 $postId       = $_POST['postId'];
 $title        = $_POST['title'] ?? '';
 $bodytext     = $_POST['bodytext'] ?? '';
 $pricebracket = $_POST['pricebracket'] ?? '';
-$imageurl     = $_POST['imageurl'] ?? '';
 $userId       = $_SESSION['userId'];
 
 // Init, Prepare, Bind, Execute
-$sql = "UPDATE builds SET title = ?, bodytext = ?, pricebracket = ?, imageurl = ? WHERE postId = ? AND userId = ?";
+$sql = "UPDATE builds SET title = ?, bodytext = ?, pricebracket = ? WHERE postId = ? AND userId = ?";
 
 $statement = $conn->stmt_init();
 
@@ -32,7 +31,7 @@ if (!$statement->prepare($sql)) {
     exit();
 }
 
-$statement->bind_param("ssssii", $title, $bodytext, $pricebracket, $imageurl, $postId, $userId);
+$statement->bind_param("sssii", $title, $bodytext, $pricebracket, $postId, $userId);
 
 if (!$statement->execute()) {
     header("Location: ../posts.php?error=Error updating post. Try again later.");
