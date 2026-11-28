@@ -76,7 +76,7 @@ function deleteImageFile(int $ownerId, string $tmpFileName): void {
 function saveImages(mysqli $conn, int $postId, int $userId, array $files): array {
     $result = ['saved' => [], 'errors' => []];
 
-    /
+    
     if (empty($files['name']) || (count($files['name']) === 1 && $files['error'][0] === UPLOAD_ERR_NO_FILE)) {
         return $result;
     }
